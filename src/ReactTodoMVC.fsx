@@ -144,31 +144,31 @@ let [<Literal>] COMPLETED_TODOS = "completed"
 let mutable private editField: HTMLInputElement = Unchecked.defaultof<_>
 
 [<Emit("undefined")>]
-let undefined : (unit -> unit) option = jsNative
+let undefined : unit = jsNative
 
 let TodoItem (props: TodoItemProps) =
-    let editText, setState = Hooks.useState(props.todo.title)
+    let textState = Hooks.useState(props.todo.title)
     Hooks.useEffect((fun () ->
         editField.focus()
         editField.setSelectionRange(editField.value.Length, editField.value.Length)
         undefined), [|props.editing|])
 
     let handleSubmit (e: Event) =
-        match editText.Trim() with
+        match textState.current.Trim() with
         | value when value.Length > 0 ->
             props.onSave(value)
-            setState value
+            textState.update value
         | _ ->
             props.onDestroy(e)
 
     let handleEdit (ev: MouseEvent) =
         props.onEdit(upcast ev)
-        setState props.todo.title
+        textState.update(props.todo.title)
 
     let handleKeyDown (e: KeyboardEvent) =
         match e.which with
         | ESCAPE_KEY ->
-            setState props.todo.title
+            textState.update props.todo.title
             props.onCancel(upcast e)
         | ENTER_KEY ->
             handleSubmit(e)
@@ -176,7 +176,7 @@ let TodoItem (props: TodoItemProps) =
 
     let handleChange (e: Event) =
         if props.editing then
-            e.Value |> setState
+            e.Value |> textState.update
 
 
     let className =
@@ -205,7 +205,7 @@ let TodoItem (props: TodoItemProps) =
         R.input [
             Class "edit"
             Ref (fun x -> editField <- x:?>_)
-            Value editText
+            Value textState.current
             OnBlur handleSubmit
             OnChange handleChange
             OnKeyDown handleKeyDown
@@ -351,18 +351,19 @@ type TodoApp(props) =
                 | COMPLETED_TODOS -> todo.completed
                 | _ -> true)
             |> Seq.map (fun todo ->
-                ofFunction TodoItem
-                    { key = todo.id
-                      todo = todo
-                      onToggle = fun _ -> this.toggle(todo)
-                      onDestroy = fun _ -> this.destroy(todo)
-                      onEdit = fun _ -> this.edit(todo)
-                      editing =
-                        match this.state.editing with
-                        | Some editing -> editing = todo.id
-                        | None -> false
-                      onSave = fun text -> this.save(todo, string text)
-                      onCancel = fun _ -> this.cancel() } [])
+                FunctionComponent.Of TodoItem
+                    ({ key = todo.id
+                       todo = todo
+                       onToggle = fun _ -> this.toggle(todo)
+                       onDestroy = fun _ -> this.destroy(todo)
+                       onEdit = fun _ -> this.edit(todo)
+                       editing =
+                         match this.state.editing with
+                         | Some editing -> editing = todo.id
+                         | None -> false
+                       onSave = fun text -> this.save(todo, string text)
+                       onCancel = fun _ -> this.cancel() })
+                )
                 |> Seq.toList
         let activeTodoCount =
             todos |> Array.fold (fun accum todo ->
@@ -373,11 +374,11 @@ type TodoApp(props) =
         let footer =
             if activeTodoCount > 0 || completedCount > 0
             then
-                ofFunction TodoFooter
+                FunctionComponent.Of TodoFooter
                     { count = activeTodoCount
                       completedCount = completedCount
                       nowShowing = this.state.nowShowing
-                      onClearCompleted = fun _ -> this.clearCompleted() } []
+                      onClearCompleted = fun _ -> this.clearCompleted() }
                 |> Some
             else None
         let main =
@@ -418,7 +419,7 @@ in the DOM by using `ReactDom.render` and subscribe to the events. Happy coding!
 
 let model = TodoModel("react-todos")
 let render() =
-    Fable.ReactDom.render(
+    ReactDom.render(
         ofType<TodoApp,_,_> { model = model } [],
         document.getElementsByClassName("todoapp").[0])
 

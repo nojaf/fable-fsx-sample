@@ -1,5 +1,11 @@
 # Fable 2.2 ~ Compiling script
 
+## Requirements
+
+Paket should be installed as global cli tool:
+
+> dotnet tool install -g Paket
+
 ## Installation
 
 > npm i
