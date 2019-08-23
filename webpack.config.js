@@ -1,7 +1,7 @@
 const path = require("path");
 
 module.exports = {
-    entry: './src/ReactTodoMVC.fsx',
+    entry:  path.join(__dirname, 'src', 'ReactTodoMVC.fsx'),
     output: {
         path: path.join(__dirname, "./public"),
         filename: "bundle.js",
