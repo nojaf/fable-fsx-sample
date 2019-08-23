@@ -11,4 +11,4 @@ before_install:
 jobs:
   include:
     - stage: "CI"
-      script: docker run -v "${PWD}:/app" -w "/app" nojaf/fable:2.3 bash -c "npm i && npm run build"
+      script: docker run -v "${PWD}:/app" -w "/app" nojaf/fable:2.3 bash -c "paket restore && npm i && npm run build"
