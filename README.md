@@ -1,4 +1,6 @@
-# Fable 2.2 ~ Compiling script
+# Fable 2.2 ~ Compiling script 
+
+[![Build Status](https://travis-ci.org/nojaf/fable-fsx-sample.svg?branch=master)](https://travis-ci.org/nojaf/fable-fsx-sample)
 
 ## Requirements
 
