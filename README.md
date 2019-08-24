@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/nojaf/fable-fsx-sample.svg?branch=master)](https://travis-ci.org/nojaf/fable-fsx-sample)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/nojaf/fable-fsx-sample.svg)](https://greenkeeper.io/)
+
 ## Requirements
 
 Paket should be installed as global cli tool:
