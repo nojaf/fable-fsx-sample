@@ -6,7 +6,7 @@ services:
 sudo: required
 
 before_install:
-  - docker pull nojaf/fable:2.3
+  - docker pull nojaf/fable:2.4
 
 jobs:
   include:
