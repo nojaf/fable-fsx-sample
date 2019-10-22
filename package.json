@@ -5,7 +5,7 @@
     "fable-compiler": "2.4.7",
     "fable-loader": "2.1.8",
     "webpack-cli": "3.3.9",
-    "webpack-dev-server": "3.8.2",
+    "webpack-dev-server": "3.9.0",
     "webpack": "4.41.1"
   },
   "scripts": {
