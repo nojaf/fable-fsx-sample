@@ -2,7 +2,7 @@
   "private": true,
   "dependencies": {
     "@babel/core": "7.8.4",
-    "fable-compiler": "2.4.15",
+    "fable-compiler": "2.4.16",
     "fable-loader": "2.1.8",
     "webpack-cli": "3.3.10",
     "webpack-dev-server": "3.10.3",
