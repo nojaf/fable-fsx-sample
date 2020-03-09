@@ -3,7 +3,7 @@
   "dependencies": {
     "@babel/core": "7.8.7",
     "fable-compiler": "2.4.19",
-    "fable-loader": "2.1.8",
+    "fable-loader": "2.1.9",
     "webpack-cli": "3.3.10",
     "webpack-dev-server": "3.10.3",
     "webpack": "4.42.0"
