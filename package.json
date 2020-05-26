@@ -1,11 +1,11 @@
 {
   "private": true,
   "dependencies": {
-    "@babel/core": "7.8.7",
-    "fable-compiler": "2.4.22",
+    "@babel/core": "7.9.0",
+    "fable-compiler": "2.4.21",
     "fable-loader": "2.1.9",
     "webpack-cli": "3.3.10",
-    "webpack-dev-server": "3.10.3",
+    "webpack-dev-server": "3.11.0",
     "webpack": "4.42.0"
   },
   "scripts": {
