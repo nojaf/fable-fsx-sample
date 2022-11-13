@@ -4,7 +4,7 @@
     "@babel/core": "7.10.2",
     "fable-compiler": "2.10.0",
     "fable-loader": "2.1.9",
-    "webpack-cli": "3.3.11",
+    "webpack-cli": "3.3.12",
     "webpack-dev-server": "3.11.0",
     "webpack": "4.43.0"
   },
